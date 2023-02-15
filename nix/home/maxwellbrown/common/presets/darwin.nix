@@ -22,7 +22,7 @@
         touchbar-restart = "sudo pkill TouchBarServer";
         tailscale = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";
         # TODO: fix pathing here
-        darwin-rebuild-switch = ''darwin-rebuild switch --flake "git+file://$HOME/Code/github.com/konradmalik/dotfiles#$(hostname -s)"'';
+        darwin-rebuild-switch = ''darwin-rebuild switch --flake "git+file://$HOME/Code/github.com/imax153/nixos#$(hostname -s)"'';
       };
     };
   };

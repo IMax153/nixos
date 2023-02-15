@@ -130,7 +130,7 @@ in {
         };
         whitelist = {
           prefix = [
-            "${config.home.homeDirectory}/Code/github.com/konradmalik"
+            "${config.home.homeDirectory}/Code/github.com/imax153"
           ];
         };
       };

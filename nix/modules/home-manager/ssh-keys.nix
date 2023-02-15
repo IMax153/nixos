@@ -18,7 +18,7 @@ in {
           options = {
             url = mkOption {
               type = types.str;
-              example = "https://github.com/konradmalik.keys";
+              example = "https://github.com/imax153.keys";
             };
             sha256 = mkOption {
               type = types.str;
