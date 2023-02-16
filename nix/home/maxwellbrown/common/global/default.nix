@@ -24,8 +24,8 @@
       # ./ranger.nix
       # ./readline.nix
       ./shells.nix
-      # ./ssh-ingress.nix
-      # ./ssh-keys.nix
+      ./ssh-ingress.nix
+      ./ssh-keys.nix
       ./starship.nix
       # ./tealdeer.nix
       # ./tmux.nix
@@ -76,6 +76,13 @@
     };
   };
 
+  # sops = {
+  #   defaultSopsFile = ../secrets.yaml;
+  #   age = {
+  #     keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
+  #   };
+  # };
+
   xdg = {
     enable = true;
     configHome = "${config.home.homeDirectory}/.config";
@@ -83,10 +90,4 @@
     dataHome = "${config.home.homeDirectory}/.local/share";
     stateHome = "${config.home.homeDirectory}/.local/state";
   };
-
-  # TODO: Figure out how to use sops-nix
-  # sops = {
-  #   defaultSopsFile = ./../secrets.yaml;
-  #   age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
-  # };
 }

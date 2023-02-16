@@ -1,0 +1,15 @@
+keys:
+  - &admin_maxwellbrown age1usc2072gec0plj2q866m0uyeh2rly60xnxts4c3xxh50cwygte8s8avj8a
+creation_rules:
+  - path_regex: hosts/common/secrets\.yaml$
+    key_groups:
+      - age:
+          - *admin_maxwellbrown
+  - path_regex: hosts/common/users/maxwellbrown/secrets\.yaml$
+    key_groups:
+      - age:
+          - *admin_maxwellbrown
+  - path_regex: home/konrad/maxwellbrown/secrets\.yaml$
+    key_groups:
+      - age:
+          - *admin_maxwellbrown

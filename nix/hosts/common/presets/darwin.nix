@@ -8,6 +8,7 @@
 }: {
   imports = [
     inputs.home-manager.darwinModules.home-manager
+    inputs.sops-nix.nixosModules.sops
 
     ../global/nix/darwin.nix
     ../global/home-manager.nix
@@ -26,6 +27,25 @@
     ];
 
     pathsToLink = ["/share" "/bin" "/Applications"];
+  };
+
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "zap";
+    };
+    taps = [
+      "homebrew/cask"
+    ];
+    casks = [
+      "zoom"
+    ];
+
+    masApps = {
+      Tailscale = 1475387142;
+    };
   };
 
   networking = {
@@ -50,7 +70,7 @@
 
     defaults = {
       dock = {
-        show-recents = true;
+        show-recents = false;
       };
       finder = {
         ShowStatusBar = true;
@@ -64,6 +84,7 @@
         DisableConsoleAccess = true;
       };
       NSGlobalDomain = {
+        _HIHideMenuBar = false;
         AppleInterfaceStyle = "Dark";
         "com.apple.mouse.tapBehavior" = 1;
         "com.apple.sound.beep.feedback" = 1;

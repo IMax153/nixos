@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ../global
     # selectively import desktop modules

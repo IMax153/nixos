@@ -1,12 +1,20 @@
 {pkgs, ...}: {
+  home = {
+    packages = with pkgs; [
+      alejandra
+      nil
+    ];
+  };
+
   programs = {
     vscode = {
       enable = true;
 
       extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
+        # bbenoist.nix
         dbaeumer.vscode-eslint
         github.copilot
+        jnoortheen.nix-ide
         ms-vscode-remote.remote-ssh
         vscodevim.vim
         yzhang.markdown-all-in-one
@@ -120,6 +128,20 @@
           "default" = "right";
           "jupyter-notebook" = "left";
         };
+        # Nix Settings
+        "nix.enableLanguageServer" = true;
+        "nix.formatterPath" = ["nix" "fmt" "--" "-"];
+        "nix.serverPath" = "nil";
+        "nix.serverSettings" = {
+          "nil" = {
+            "diagnostics" = {
+              "ignored" = ["unused_binding" "unused_with"];
+            };
+            "formatting" = {
+              "command" = ["alejandra"];
+            };
+          };
+        };
         # Python Settings
         "autoDocstring.docstringFormat" = "numpy";
         "python.formatting.provider" = "black";
@@ -189,6 +211,9 @@
         "[markdown]" = {
           "editor.formatOnSave" = true;
           "editor.defaultFormatter" = "yzhang.markdown-all-in-one";
+        };
+        "[nix]" = {
+          "editor.formatOnSave" = true;
         };
         "[python]" = {
           "editor.formatOnSave" = true;

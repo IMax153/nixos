@@ -8,7 +8,7 @@
 }: {
   nixpkgs = {
     overlays = [
-      # outputs.overlays.modifications
+      outputs.overlays.modifications
       # outputs.overlays.additions
 
       (final: prev: {

@@ -32,6 +32,10 @@
           "${inputs.self}/files/iterm2/maxwellbrown.json"
         ];
       };
+
+      ssh-egress = {
+        enable = true;
+      };
     };
   };
 }

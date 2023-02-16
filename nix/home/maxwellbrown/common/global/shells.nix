@@ -157,7 +157,7 @@ in {
       enableCompletion = true;
       enableSyntaxHighlighting = true;
       autocd = true;
-      dotDir = lib.removePrefix "${config.home.homeDirectory}" "${config.xdg.configHome}/zsh";
+      dotDir = builtins.replaceStrings [ "${config.home.homeDirectory}" ] [ "" ] "${config.xdg.configHome}/zsh";
       defaultKeymap = "viins";
       profileExtra = ''
         # sourced on login shell, after zshenv.
