@@ -13,6 +13,7 @@
     ../global/nix/nixos.nix
     ../global/home-manager.nix
     ../global/locale.nix
+    ../global/oom-killer.nix
     ../global/openssh.nix
     ../global/tailscale.nix
 
