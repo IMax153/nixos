@@ -19,7 +19,6 @@ in
 
         nativeBuildInputs = [
           git
-          nmap
           # nix
           nix
           nil

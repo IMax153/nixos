@@ -91,7 +91,7 @@
     };
 
     nixosConfigurations = {
-      # nixos-rebuild --flake ".#homepi" --target-host "homepi" --build-host "homepi" --use-remote-sudo dry-activate
+      # nixos-rebuild --flake ".#homepi" --target-host "homepi" --build-host "homepi" --use-remote-sudo
       homepi = nixpkgs.lib.nixosSystem {
         inherit specialArgs;
         modules = ["${self}/nix/hosts/homepi"];

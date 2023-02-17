@@ -7,6 +7,7 @@
     ../global
     # selectively import desktop modules
     ../optional/desktop/common/font.nix
+    ../optional/desktop/modules/1password.nix
   ];
 
   home = {
