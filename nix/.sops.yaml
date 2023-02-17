@@ -1,15 +1,19 @@
 keys:
+  # Personal SSH
   - &admin_maxwellbrown age1usc2072gec0plj2q866m0uyeh2rly60xnxts4c3xxh50cwygte8s8avj8a
+  - &host_homepi age1d6l0ctau4nhr3pmnpvxhd8sq7vhakg6lc3h8udwmyyeeqpfj0c3qq9u0p4
 creation_rules:
-  - path_regex: hosts/common/secrets\.yaml$
+  - path_regex: hosts/common/secrets\.ya?ml$
     key_groups:
       - age:
           - *admin_maxwellbrown
-  - path_regex: hosts/common/users/maxwellbrown/secrets\.yaml$
+          - *host_homepi
+  - path_regex: hosts/common/users/maxwellbrown/secrets\.ya?ml$
     key_groups:
       - age:
           - *admin_maxwellbrown
-  - path_regex: home/konrad/maxwellbrown/secrets\.yaml$
+          - *host_homepi
+  - path_regex: home/maxwellbrown/secrets\.ya?ml$
     key_groups:
       - age:
           - *admin_maxwellbrown
