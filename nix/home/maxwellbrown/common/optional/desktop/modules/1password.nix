@@ -10,25 +10,8 @@ in {
   home = {
     file = {
       sock = {
-        source = config.lib.file.mkOutOfStoreSymlink darwinSockPath;
+        source = config.lib.file.mkOutOfStoreSymlink sshAuthSock;
         target = "${config.home.homeDirectory}/.1password/agent.sock";
-      };
-    };
-
-    programs = {
-      bash = {
-        initExtra = lib.mkIf pkgs.stdenvNoCC.isDarwin ''
-          if command -v op >/dev/null; then
-            source <(op completion bash)
-          fi
-        '';
-      };
-      zsh = {
-        initExtra = lib.mkIf pkgs.stdenvNoCC.isDarwin ''
-          if command -v op >/dev/null; then
-            eval "$(op completion zsh)"; compdef _op op
-          fi
-        '';
       };
     };
 

@@ -19,8 +19,8 @@
       # ./glow.nix
       # ./k9s.nix
       # ./khal.nix
-      # ./neovim.nix
-      # ./packages.nix
+      ./neovim.nix
+      ./packages.nix
       # ./ranger.nix
       # ./readline.nix
       ./shells.nix
