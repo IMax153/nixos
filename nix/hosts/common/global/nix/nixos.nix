@@ -1,10 +1,12 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   ifTheyExist = users: builtins.filter (user: builtins.hasAttr user config.users.users) users;
   theirAuthorizedKeys = users: builtins.map (user: config.users.users.${user}.openssh.authorizedKeys.keys) users;
-in
-{
-  imports = [ ./shared.nix ];
+in {
+  imports = [./shared.nix];
   nix = {
     gc = {
       automatic = true;
@@ -15,17 +17,17 @@ in
 
     optimise = {
       automatic = true;
-      dates = [ "daily" ];
+      dates = ["daily"];
     };
 
     sshServe = {
       enable = true;
-      keys = lib.flatten (theirAuthorizedKeys (ifTheyExist [ "maxwellbrown" ]));
+      keys = lib.flatten (theirAuthorizedKeys (ifTheyExist ["maxwellbrown"]));
       write = true;
     };
 
     settings = {
-      trusted-users = [ "nix-ssh" ];
+      trusted-users = ["maxwellbrown" "nix-ssh"];
     };
 
     # Map registries to channels
