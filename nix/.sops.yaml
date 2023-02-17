@@ -13,7 +13,7 @@ creation_rules:
       - age:
           - *admin_maxwellbrown
           - *host_homepi
-  - path_regex: home/maxwellbrown/secrets\.ya?ml$
+  - path_regex: home/maxwellbrown/common/secrets\.ya?ml$
     key_groups:
       - age:
           - *admin_maxwellbrown
