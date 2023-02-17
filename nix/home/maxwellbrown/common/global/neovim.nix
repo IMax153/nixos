@@ -166,11 +166,11 @@ in {
 
   xdg = {
     configFile = {
-      "nvim" = {
-        source = "${pkgs.dotfiles}/neovim";
-        recursive = true;
-      };
-      "nvim/lua/konrad/nix-colors.lua" = {
+      # "nvim" = {
+      #   source = "${pkgs.dotfiles}/neovim";
+      #   recursive = true;
+      # };
+      "nvim/lua/maxwellbrown/nix-colors.lua" = {
         text = let
           c = config.colorscheme.colors;
         in ''

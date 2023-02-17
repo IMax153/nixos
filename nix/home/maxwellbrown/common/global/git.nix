@@ -27,7 +27,7 @@
         };
 
         core = {
-          editor = "code --wait";
+          editor = "nvim -u NONE";
           filemode = false;
           ignorecase = false;
         };
