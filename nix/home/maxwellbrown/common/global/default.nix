@@ -76,13 +76,6 @@
     };
   };
 
-  sops = {
-    defaultSopsFile = ../secrets.yaml;
-    age = {
-      keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
-    };
-  };
-
   xdg = {
     enable = true;
     configHome = "${config.home.homeDirectory}/.config";
