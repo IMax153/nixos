@@ -1,6 +1,7 @@
 {config, ...}: {
   imports = [
     ./hardware-configuration.nix
+    ./home-assistant.nix
     ../common/presets/nixos.nix
   ];
 
