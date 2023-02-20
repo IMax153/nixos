@@ -64,7 +64,7 @@
     inherit (self) outputs;
     specialArgs = {inherit inputs outputs;};
   in {
-    homeManagerModules = import "${self}/nix/modules/home-manager";
+    homeManagerModules = import "${self}/modules/home-manager";
 
     formatter = forAllSystems (
       system: let
@@ -79,22 +79,27 @@
       default = pkgs.callPackage "${self}/shell.nix" {inherit pkgs;};
     });
 
-    overlays = import "${self}/nix/overlays";
+    overlays = import "${self}/overlays";
 
     darwinConfigurations = {
       # darwin-rebuild switch --flake .#$(hostname -s)
       mbp2021 = darwin.lib.darwinSystem {
         inherit specialArgs;
         inputs = nixpkgs.lib.overrideExisting inputs {nixpkgs = nixpkgs-darwin;};
-        modules = ["${self}/nix/hosts/mbp2021"];
+        modules = ["${self}/hosts/mbp2021"];
       };
     };
 
     nixosConfigurations = {
-      # nixos-rebuild --flake ".#homepi" --target-host "homepi" --build-host "homepi" --use-remote-sudo
+      # Although the below incantation _should_ work:
+      #   nixos-rebuild --flake ".#homepi" --target-host "homepi" --build-host "homepi" --use-remote-sudo switch
+      # it does not due to the following bug:
+      #   https://github.com/NixOS/nixpkgs/issues/118655
+      # So for now, manually use ssh:
+      #   ssh homepi -- sudo nixos-rebuild --flake github:imax153/nixos#homepi switch
       homepi = nixpkgs.lib.nixosSystem {
         inherit specialArgs;
-        modules = ["${self}/nix/hosts/homepi"];
+        modules = ["${self}/hosts/homepi"];
       };
     };
   };
