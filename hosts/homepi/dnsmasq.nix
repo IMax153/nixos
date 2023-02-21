@@ -24,12 +24,12 @@
         # Don't poll /etc/resolv.conf for changes.
         no-poll
 
-        # Specifies DNS domains for the DHCP server.
-        domain=home.local
-        local=/home.local
+        domain=thebrowns.home
 
-        # Specify how to resolve specific subdomains
-        address=/.home.local/127.0.0.1
+        # Add domains which you want to force to an IP address here.
+        # The example below send any host in double-click.net to a local
+        # web-server.
+        address=/www.thebrowns.home/127.0.0.1
       '';
     };
   };
