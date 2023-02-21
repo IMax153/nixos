@@ -1,7 +1,7 @@
 {config, ...}: {
   imports = [
     ../common/presets/nixos.nix
-    ./dnsmasq.nix
+    # ./dnsmasq.nix
     ./hardware-configuration.nix
     ./home-assistant.nix
   ];
