@@ -27,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,6 +53,7 @@
     nixpkgs-darwin,
     nixpkgs-unstable,
     darwin,
+    deploy-rs,
     home-manager,
     ...
   }: let
@@ -91,15 +97,24 @@
     };
 
     nixosConfigurations = {
-      # Although the below incantation _should_ work:
-      #   nixos-rebuild --flake ".#homepi" --target-host "homepi" --build-host "homepi" --use-remote-sudo switch
-      # it does not due to the following bug:
-      #   https://github.com/NixOS/nixpkgs/issues/118655
-      # So for now, manually use ssh:
-      #   ssh homepi -- sudo nixos-rebuild --flake github:imax153/nixos#homepi switch
+      # deploy .#homepi
       homepi = nixpkgs.lib.nixosSystem {
         inherit specialArgs;
         modules = ["${self}/hosts/homepi"];
+      };
+    };
+
+    deploy = {
+      nodes = {
+        homepi = {
+          hostname = "homepi";
+          profiles = {
+            system = {
+              sshUser = "root";
+              path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.homepi;
+            };
+          };
+        };
       };
     };
   };
