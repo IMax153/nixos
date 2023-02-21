@@ -1,8 +1,9 @@
 {config, ...}: {
   imports = [
+    ../common/presets/nixos.nix
+    ./dnsmasq.nix
     ./hardware-configuration.nix
     ./home-assistant.nix
-    ../common/presets/nixos.nix
   ];
 
   networking = {
