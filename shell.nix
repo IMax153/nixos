@@ -1,4 +1,8 @@
-{pkgs, ...}:
+{
+  pkgs,
+  self,
+  ...
+}:
 pkgs.mkShellNoCC {
   # sopsPGPKeyDirs = ["./nixos/secrets/keys"];
   # sopsCreateGPGHome = true;
@@ -34,4 +38,8 @@ pkgs.mkShellNoCC {
 
   # Ensure that SOPS uses Vim for editing secrets
   EDITOR = "vim";
+
+  shellHook = ''
+    ${self.checks.${pkgs.system}.pre-commit.shellHook}
+  '';
 }

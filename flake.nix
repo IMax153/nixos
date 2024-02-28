@@ -124,11 +124,7 @@
     };
 
     devShells = eachSystem (pkgs: {
-      default =
-        (import ./shell.nix {inherit pkgs;})
-        // {
-          inherit (self.checks.${pkgs.system}.pre-commit) shellHook;
-        };
+      default = import ./shell.nix {inherit pkgs self;};
     });
   };
 }
