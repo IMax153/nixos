@@ -1,0 +1,3 @@
+{
+  maxwellbrown = import ./maxwellbrown.nix;
+}
