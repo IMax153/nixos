@@ -11,6 +11,7 @@ with pkgs.vscode-extensions;
     ms-vscode-remote.remote-ssh
     redhat.vscode-yaml
     timonwong.shellcheck
+    unifiedjs.vscode-mdx
     vscodevim.vim
     yzhang.markdown-all-in-one
   ]
