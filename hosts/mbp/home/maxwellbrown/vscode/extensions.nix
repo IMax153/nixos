@@ -16,6 +16,12 @@ with pkgs.vscode-extensions;
   ]
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     {
+      name = "effect-vscode";
+      publisher = "effectful-tech";
+      version = "0.0.2";
+      sha256 = "sha256-4DVSffwCISPD2nnsppv4l1QB9G67MnD2MklJKDC/EFQ=";
+    }
+    {
       name = "vscode-icons";
       publisher = "vscode-icons-team";
       version = "12.7.0";

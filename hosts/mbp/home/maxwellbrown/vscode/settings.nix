@@ -3,8 +3,8 @@
   "breadcrumbs.enabled" = true;
   # Editor Settings
   "editor.codeActionsOnSave" = {
-    "source.fixAll.eslint" = true;
-    "source.fixAll.shellcheck" = true;
+    "source.fixAll.eslint" = "always";
+    "source.fixAll.shellcheck" = "always";
   };
   "editor.cursorBlinking" = "solid";
   "editor.cursorWidth" = 3;
@@ -29,7 +29,7 @@
   "editor.rulers" = [80 100];
   "editor.suggestSelection" = "first";
   "editor.tabSize" = 2;
-  "editor.wordBasedSuggestions" = true;
+  "editor.wordBasedSuggestions" = "matchingDocuments";
   "editor.wordWrap" = "on";
   # Explorer Settings
   "explorer.confirmDragAndDrop" = false;
@@ -116,7 +116,6 @@
   # Direnv Settings
   "direnv.path.executable" = "${pkgs.direnv}/bin/direnv";
   # Python Settings
-  "autoDocstring.docstringFormat" = "numpy";
   "python.analysis.typeCheckingMode" = "basic";
   "python.formatting.provider" = "black";
   "python.linting.flake8Enabled" = false;
@@ -170,8 +169,6 @@
     "<C-a>" = false;
     "<C-f>" = false;
   };
-  # VS Intellicode Settings
-  "vsintellicode.modify.editor.suggestSelection" = "choseToUpdateConfiguration";
   # LANGUAGE SETTINGS
   "[csharp]" = {
     "editor.tabSize" = 4;
