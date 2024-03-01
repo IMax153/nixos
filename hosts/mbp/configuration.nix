@@ -74,6 +74,9 @@ in {
   # Enable TouchID for sudo
   security.pam.enableSudoTouchIdAuth = true;
 
+  # Enable auto-upgrading Nix
+  services.nix-daemon.enable = true;
+
   # Enforce the Nix Darwin state version - used for backwards compatibility,
   # please read the changelog before changing
   # $ darwin-rebuild changelog

@@ -123,10 +123,5 @@ in {
         daemonProcessType = "Standard";
         daemonIOLowPriority = true;
       };
-
-    # Auto upgrade nix package and the daemon service.
-    services.nix-daemon = {
-      enable = pkgs.stdenvNoCC.isDarwin;
-    };
   };
 }

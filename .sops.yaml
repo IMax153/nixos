@@ -1,0 +1,23 @@
+keys:
+  # Personal SSH
+  - &admin_maxwellbrown age1usc2072gec0plj2q866m0uyeh2rly60xnxts4c3xxh50cwygte8s8avj8a
+  # Host SSH
+  - &host_artemis age1lw39xxdzsam8cmpvng7hx84jxavsdhnljvrkrx8u3ru9rtesxc7s7yh9x8
+  - &host_hephaestus age120nrgcuady3e29zz96csmqv8g2kwh009kh5zlrw7saec8wrck5xsek5q4c
+  - &host_hermes age18rqmxmsfchmd5584sp7l0yyqhduf99lu2kwc88kjq3gvgztkfu7sjemvkd
+creation_rules:
+  - path_regex: nixos/artemis/secrets.yaml$
+    key_groups:
+      - age:
+          - *admin_maxwellbrown
+          - *host_artemis
+  - path_regex: nixos/hephaestus/secrets.yaml$
+    key_groups:
+      - age:
+          - *admin_maxwellbrown
+          - *host_hephaestus
+  - path_regex: nixos/hermes/secrets.yaml$
+    key_groups:
+      - age:
+          - *admin_maxwellbrown
+          - *host_hermes

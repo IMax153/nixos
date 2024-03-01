@@ -1,17 +1,24 @@
 {
-  description = "Maxwell Brown's Nix / NixOS system configurationss";
+  description = "Maxwell Brown's Nix system configurationss";
 
   inputs = {
     # Package Sets
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
 
     # Environment / System Management
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    srvos.url = "github:numtide/srvos";
+    srvos.inputs.nixpkgs.follows = "nixpkgs";
 
     # Home Manager Modules
     nix-colors.url = "github:misterio77/nix-colors";
@@ -25,7 +32,6 @@
   outputs = inputs @ {
     self,
     darwin,
-    home-manager,
     nixpkgs,
     pre-commit-hooks,
     treefmt-nix,
@@ -33,12 +39,24 @@
   }: let
     inherit (nixpkgs.lib) attrValues genAttrs optionalAttrs;
 
-    defaultModules = [
-      home-manager.darwinModules.home-manager
-      {
-        _module.args.self = self;
-        _module.args.inputs = inputs;
-      }
+    defaultModuleArgs = {
+      _module.args.self = self;
+      _module.args.inputs = inputs;
+    };
+
+    defaultDarwinModules = [
+      defaultModuleArgs
+      inputs.home-manager.darwinModules.home-manager
+    ];
+
+    defaultNixOSModules = [
+      defaultModuleArgs
+      inputs.home-manager.nixosModules.home-manager
+      inputs.sops-nix.nixosModules.sops
+      inputs.srvos.nixosModules.common
+      inputs.srvos.nixosModules.mixins-nix-experimental
+      inputs.srvos.nixosModules.mixins-trusted-nix-caches
+      {srvos.flake = self;}
     ];
 
     nixpkgsDefaults = {
@@ -106,6 +124,7 @@
     commonModules = attrValues (import ./modules/common);
     darwinModules = attrValues (import ./modules/darwin);
     homeManagerModules = attrValues (import ./modules/home);
+    nixosModules = attrValues (import ./modules/nixos);
 
     ##############################################################################
     # Machines
@@ -114,7 +133,7 @@
       mbp = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules =
-          defaultModules
+          defaultDarwinModules
           ++ self.commonModules
           ++ self.darwinModules
           ++ [
@@ -123,6 +142,40 @@
       };
     };
 
+    nixosConfigurations = {
+      artemis = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules =
+          defaultNixOSModules
+          ++ self.commonModules
+          ++ self.nixosModules
+          ++ [
+            ./hosts/artemis/configuration.nix
+            inputs.disko.nixosModules.disko
+            inputs.srvos.nixosModules.server
+            inputs.srvos.nixosModules.mixins-systemd-boot
+          ];
+      };
+
+      hephaestus = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules =
+          defaultNixOSModules
+          ++ self.commonModules
+          ++ self.nixosModules
+          ++ [
+            ./hosts/hephaestus/configuration.nix
+            inputs.disko.nixosModules.disko
+            inputs.srvos.nixosModules.server
+            inputs.srvos.nixosModules.mixins-systemd-boot
+            inputs.srvos.nixosModules.roles-nix-remote-builder
+          ];
+      };
+    };
+
+    ##############################################################################
+    # Shells
+    ##############################################################################
     devShells = eachSystem (pkgs: {
       default = import ./shell.nix {inherit pkgs self;};
     });

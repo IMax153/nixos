@@ -17,6 +17,8 @@ pkgs.mkShellNoCC {
     # K8s
     kubernetes-helm
     kubectl
+    # Nix
+    nixos-rebuild
     # Python
     python3.pkgs.black
     ruff
