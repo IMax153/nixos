@@ -13,6 +13,7 @@
     ./git
     ./iterm2
     ./k8s
+    ./sops
     ./ssh
     ./starship
     ./terraform
