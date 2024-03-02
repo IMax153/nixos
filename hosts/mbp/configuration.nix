@@ -57,6 +57,8 @@ in {
     ];
   };
 
+  nix.linux-builder.enable = true;
+
   # Nixpkgs Configuration
   nixpkgs = {
     config = {

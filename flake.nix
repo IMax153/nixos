@@ -157,6 +157,18 @@
           ];
       };
 
+      hermes = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules =
+          defaultNixOSModules
+          ++ self.commonModules
+          ++ self.nixosModules
+          ++ [
+            ./hosts/hermes/configuration.nix
+            inputs.srvos.nixosModules.server
+          ];
+      };
+
       hephaestus = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules =
