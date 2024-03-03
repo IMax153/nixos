@@ -23,6 +23,12 @@ with pkgs.vscode-extensions;
       sha256 = "sha256-4DVSffwCISPD2nnsppv4l1QB9G67MnD2MklJKDC/EFQ=";
     }
     {
+      name = "pretty-ts-errors";
+      publisher = "yoavbls";
+      version = "0.5.3";
+      sha256 = "sha256-JSCyTzz10eoUNu76wNUuvPVVKq4KaVKobS1CAPqgXUA=";
+    }
+    {
       name = "vscode-icons";
       publisher = "vscode-icons-team";
       version = "12.7.0";
