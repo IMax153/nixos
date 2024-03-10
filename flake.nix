@@ -130,6 +130,7 @@
     # Machines
     ##############################################################################
     darwinConfigurations = {
+      # nix run nix-darwin -- switch --flake .#mbp
       mbp = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules =
