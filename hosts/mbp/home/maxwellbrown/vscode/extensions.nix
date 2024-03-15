@@ -19,8 +19,8 @@ with pkgs.vscode-extensions;
     {
       name = "effect-vscode";
       publisher = "effectful-tech";
-      version = "0.0.2";
-      sha256 = "sha256-4DVSffwCISPD2nnsppv4l1QB9G67MnD2MklJKDC/EFQ=";
+      version = "0.1.0";
+      sha256 = "sha256-mxIvXkyd39r0EeWtemWyqUopWaTItYoiaNNabMlycq4=";
     }
     {
       name = "pretty-ts-errors";
