@@ -27,7 +27,7 @@ in {
   config = mkIf cfg.enable {
     nix =
       {
-        package = pkgs.nixVersions.nix_2_19;
+        package = pkgs.nixVersions.nix_2_21;
 
         gc =
           {

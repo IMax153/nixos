@@ -8,8 +8,8 @@ in {
   programs.zsh = {
     inherit dotDir;
     enable = true;
-    enableAutosuggestions = true;
     enableCompletion = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     autocd = true;
     defaultKeymap = "viins";
