@@ -1,0 +1,39 @@
+{
+  inputs,
+  config,
+  pkgs,
+  self,
+  ...
+}: {
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    verbose = true;
+    extraSpecialArgs = {inherit inputs self;};
+    sharedModules = [
+      inputs.nixvim.homeManagerModules.nixvim
+      inputs.stylix.homeManagerModules.stylix
+
+      {
+        home.stateVersion =
+          if pkgs.stdenv.hostPlatform.isLinux
+          then config.system.stateVersion
+          else "24.11";
+      }
+    ];
+  };
+
+  programs.zsh = {
+    # Required even when using home-manager's zsh module since the /etc/profile
+    # load order is partly controlled by this. See nix-community/home-manager#3681
+    enable = true;
+    # Disable the completion in the global module because it would call compinit
+    # but the home manager config also calls compinit. This causes the cache to
+    # be invalidated because the fpath changes in-between, causing constant
+    # re-evaluation and thus startup times of 1-2 seconds. Disable the
+    # completion here and only keep the home-manager one to fix it.
+    enableCompletion = false;
+  };
+  # But still link all completions from all packages so they can be found by zsh
+  environment.pathsToLink = ["/share/zsh"];
+}
