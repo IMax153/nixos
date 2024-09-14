@@ -11,7 +11,7 @@
     verbose = true;
     extraSpecialArgs = {inherit inputs self;};
     sharedModules = [
-      inputs.nixvim.homeManagerModules.nixvim
+      # inputs.nixvim.homeManagerModules.nixvim
       inputs.stylix.homeManagerModules.stylix
 
       {

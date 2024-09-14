@@ -1,14 +1,21 @@
-{config, ...}: {
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ../../home/aws.nix
     ../../home/direnv.nix
     ../../home/git.nix
     ../../home/k8s.nix
-    ../../home/neovim
+    # ../../home/neovim
     ../../home/packages.nix
     ../../home/tmux.nix
     ../../home/ssh.nix
     ../../home/starship.nix
+    ../../home/terraform.nix
     ../../home/zsh
 
     ../../home/graphical/fonts.nix
@@ -16,6 +23,11 @@
     ../../home/graphical/stylix.nix
     ../../home/graphical/vscode
   ];
+
+  home = {
+    packages = [ inputs.nixvim.packages.${pkgs.system}.default ];
+    sessionVariables.EDITOR = "nvim";
+  };
 
   targets.darwin = {
     currentHostDefaults = {

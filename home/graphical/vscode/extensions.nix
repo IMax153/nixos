@@ -8,8 +8,8 @@ with pkgs.vscode-extensions;
     jnoortheen.nix-ide
     mads-hartmann.bash-ide-vscode
     mkhl.direnv
-    ms-python.python
-    ms-python.vscode-pylance
+    # ms-python.python
+    # ms-python.vscode-pylance
     ms-vscode-remote.remote-ssh
     redhat.vscode-yaml
     timonwong.shellcheck
