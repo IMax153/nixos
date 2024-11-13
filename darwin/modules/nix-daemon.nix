@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   services.nix-daemon.enable = true;
 
   nix = {
@@ -27,9 +28,6 @@
     };
 
     settings = {
-      # Auto-link identical files in the Nix store to a single source
-      auto-optimise-store = true;
-
       # Avoid unnecessarily copying files over SSH
       builders-use-substitutes = true;
 
@@ -38,9 +36,11 @@
 
       # Enable flakes by default
       experimental-features =
-        ["nix-command" "flakes"]
-        ++ lib.optional (lib.versionOlder (lib.versions.majorMinor config.nix.package.version) "2.22")
-        "repl-flake";
+        [
+          "nix-command"
+          "flakes"
+        ]
+        ++ lib.optional (lib.versionOlder (lib.versions.majorMinor config.nix.package.version) "2.22") "repl-flake";
 
       # Fallback to building from source if a binary substitution fails
       fallback = true;
@@ -68,7 +68,11 @@
       ];
 
       # Nix Store Access Control
-      trusted-users = ["@admin" "maxwellbrown" "root"];
+      trusted-users = [
+        "@admin"
+        "maxwellbrown"
+        "root"
+      ];
 
       # Warn about dirty VCS trees
       warn-dirty = false;
