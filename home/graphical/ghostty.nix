@@ -1,8 +1,15 @@
 {
-  xdg.configFile.ghostty = {
+  home.sessionVariables = {
+    TERMINAL = "ghostty";
+  };
+
+  xdg.configFile."ghostty/config" = {
     text = ''
       # Ghostty theme
       theme = catppuccin-macchiato
+
+      # Shell
+      shell-integration = zsh
 
       # Font family
       font-family = JetBrains Mono
@@ -12,7 +19,7 @@
       font-style-bold-italic = Bold Italic
 
       # Font size
-      font-size = 18
+      font-size = 16
 
       # Opacity of split windows
       unfocused-split-opacity = 0.97  
@@ -27,8 +34,9 @@
       clipboard-read = allow
       clipboard-write = allow
 
-      # Allow option to work as alt on macos
+      # MacOS Options
       macos-option-as-alt = true
+      macos-titlebar-proxy-icon = hidden
 
       # Always show ghostty as the title
       title = ghostty 

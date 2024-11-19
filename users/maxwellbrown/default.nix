@@ -18,7 +18,6 @@
     ../../home/zsh
 
     ../../home/graphical/fonts.nix
-    # ../../home/graphical/kitty.nix
     ../../home/graphical/ghostty.nix
     ../../home/graphical/stylix.nix
     ../../home/graphical/vscode

@@ -1,8 +1,10 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   stylix.targets.tmux.enable = true;
 
   programs.tmux = {
     enable = true;
+    sensibleOnTop = false;
     escapeTime = 300;
     keyMode = "vi";
     mouse = true;
