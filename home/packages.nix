@@ -1,3 +1,4 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [qovery-cli];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ ];
 }

@@ -42,7 +42,7 @@
 
     dock = {
       autohide = true;
-      expose-group-by-app = false;
+      expose-group-apps = false;
       mru-spaces = false;
       show-recents = false;
       tilesize = 48;

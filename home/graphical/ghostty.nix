@@ -21,6 +21,11 @@
       # Font size
       font-size = 16
 
+      # Font features
+      font-feature = -calt 
+      font-feature = -liga 
+      font-feature = -dlig
+
       # Opacity of split windows
       unfocused-split-opacity = 0.97  
 
@@ -47,8 +52,8 @@
       window-colorspace = display-p3
       window-padding-color = background
       window-padding-balance = true
-      window-padding-x = 5
-      window-padding-y = 5
+      window-padding-x = 0
+      window-padding-y = 0
     '';
   };
 }

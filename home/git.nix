@@ -4,18 +4,17 @@
     userName = "Maxwell Brown";
     userEmail = "maxwellbrown1990@gmail.com";
 
-    # TODO: re-enable in a few days
-    # delta = {
-    #   enable = true;
-    #   options = {
-    #     dark = true;
-    #     features = "side-by-side";
-    #     hyperlinks = false;
-    #     line-numbers = true;
-    #     navigate = true;
-    #     syntax-theme = "Dracula";
-    #   };
-    # };
+    delta = {
+      enable = true;
+      options = {
+        dark = true;
+        features = "side-by-side";
+        hyperlinks = false;
+        line-numbers = true;
+        navigate = true;
+        syntax-theme = "Dracula";
+      };
+    };
 
     extraConfig = {
       color = {

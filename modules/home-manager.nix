@@ -4,21 +4,21 @@
   pkgs,
   self,
   ...
-}: {
+}:
+{
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     verbose = true;
-    extraSpecialArgs = {inherit inputs self;};
+    extraSpecialArgs = {
+      inherit inputs self;
+    };
     sharedModules = [
-      # inputs.nixvim.homeManagerModules.nixvim
       inputs.stylix.homeManagerModules.stylix
 
       {
         home.stateVersion =
-          if pkgs.stdenv.hostPlatform.isLinux
-          then config.system.stateVersion
-          else "24.11";
+          if pkgs.stdenv.hostPlatform.isLinux then config.system.stateVersion else "24.11";
       }
     ];
   };
@@ -35,5 +35,5 @@
     enableCompletion = false;
   };
   # But still link all completions from all packages so they can be found by zsh
-  environment.pathsToLink = ["/share/zsh"];
+  environment.pathsToLink = [ "/share/zsh" ];
 }
