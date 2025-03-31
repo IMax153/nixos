@@ -2,6 +2,16 @@
   description = "My personal Nix configuration";
 
   inputs = {
+    aider = {
+      url = "github:matko/aider-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
     };
@@ -24,6 +34,11 @@
       url = "github:IMax153/nixvim";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,30 +46,54 @@
     };
   };
 
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs@{ devshell, flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
+        devshell.flakeModule
         ./darwin/flake-module.nix
         ./pkgs/flake-module.nix
       ];
 
-      systems = ["aarch64-darwin"];
+      systems = [ "aarch64-darwin" ];
 
-      perSystem = {
-        config,
-        self',
-        inputs',
-        pkgs,
-        system,
-        ...
-      }: {
-        # Per-system attributes can be defined here. The self' and inputs'
-        # module parameters provide easy access to attributes of the same
-        # system.
+      perSystem =
+        {
+          config,
+          self',
+          inputs',
+          pkgs,
+          system,
+          ...
+        }:
+        {
+          devshells.default =
+            { extraModulesPath, ... }:
+            {
+              # `extraModulesPath` provides access to additional modules that are
+              # not included in the standard devshell modules list.
+              #
+              # Please see https://numtide.github.io/devshell/extending.html for
+              # documentation on consuming extra modules, and see
+              # https://github.com/numtide/devshell/tree/main/extra for the
+              # extra modules that are currently available.
+              imports = [ "${extraModulesPath}/git/hooks.nix" ];
 
-        # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
-        # packages.default = pkgs.hello;
-      };
+              git.hooks.enable = false;
+              git.hooks.pre-commit.text = ''
+                echo 1>&2 'time to implement a pre-commit hook!'
+                exit 1
+              '';
+
+              packages = with pkgs; [
+                age
+                findutils
+                sops
+                ssh-to-age
+                yq-go
+              ];
+            };
+        };
 
       flake = {
         # The usual flake attributes can be defined here, including system-

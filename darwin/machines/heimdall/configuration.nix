@@ -3,7 +3,8 @@
   inputs,
   self,
   ...
-}: {
+}:
+{
   imports = [
     # Flake Modules
     inputs.home-manager.darwinModules.home-manager
@@ -17,13 +18,15 @@
     ../../modules/nix-daemon.nix
     ../../modules/sudo.nix
     ../../modules/users.nix
+    ../../modules/virtualization.nix
   ];
 
   networking.hostName = "heimdall";
 
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
-    config.allowUnfreePredicate = pkg:
+    config.allowUnfreePredicate =
+      pkg:
       builtins.elem (lib.getName pkg) [
         "vscode"
         "vscode-extension-MS-python-vscode-pylance"

@@ -9,7 +9,7 @@
     keyMode = "vi";
     mouse = true;
     prefix = "C-a";
-    shell = "${pkgs.zsh}/bin/zsh";
+    # shell = "${pkgs.zsh}/bin/zsh";
     terminal = "tmux-256color";
     extraConfig = builtins.readFile ./tmux.conf;
     plugins = [

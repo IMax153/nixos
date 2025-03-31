@@ -1,0 +1,9 @@
+---
+keys:
+  # Personal
+  - &admin_maxwellbrown age1usc2072gec0plj2q866m0uyeh2rly60xnxts4c3xxh50cwygte8s8avj8a
+creation_rules:
+  - path_regex: users/maxwellbrown/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *admin_maxwellbrown

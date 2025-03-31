@@ -2,24 +2,21 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   brewEnabled = config.homebrew.enable;
-in {
+in
+{
   homebrew = {
     enable = true;
     onActivation.autoUpdate = true;
     onActivation.cleanup = "zap";
     global.brewfile = true;
 
-    brews = [
-      "podman"
-      "podman-compose"
-    ];
     casks = [
       "1password-cli"
       "keymapp"
       "obsidian"
-      "podman-desktop"
       "yubico-yubikey-manager"
       "zoom"
     ];
@@ -35,6 +32,9 @@ in {
   environment.shellInit = lib.mkIf brewEnabled ''
     eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
   '';
+
+  # Make sure to add podman to the PATH since it is installed to /opt
+  environment.systemPath = [ "/opt/podman/bin" ];
 
   programs = {
     # https://docs.brew.sh/Shell-Completion#configuring-completions-in-fish

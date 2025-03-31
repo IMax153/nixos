@@ -1,12 +1,6 @@
-{
-  config,
-  inputs,
-  pkgs,
-  ...
-}:
+{ config, ... }:
 {
   imports = [
-    ../../home/aws.nix
     ../../home/direnv.nix
     ../../home/git.nix
     ../../home/k8s.nix
@@ -21,12 +15,9 @@
     ../../home/graphical/ghostty.nix
     ../../home/graphical/stylix.nix
     ../../home/graphical/vscode
-  ];
 
-  home = {
-    packages = [ inputs.nixvim.packages.${pkgs.system}.default ];
-    sessionVariables.EDITOR = "nvim";
-  };
+    ./nixvim.nix
+  ];
 
   targets.darwin = {
     currentHostDefaults = {

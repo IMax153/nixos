@@ -14,6 +14,7 @@
       inherit inputs self;
     };
     sharedModules = [
+      inputs.sops-nix.homeManagerModules.sops
       inputs.stylix.homeManagerModules.stylix
 
       {
